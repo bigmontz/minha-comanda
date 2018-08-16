@@ -9,3 +9,7 @@ table {
 tr.mat-footer-row {
   font-weight: bold;
 }
+
+button {
+  margin-left: 3px;
+}

@@ -1,4 +1,16 @@
 import { Component } from '@angular/core';
+import { MatTableDataSource } from '@angular/material/table';
+
+class Produto {
+
+  constructor(public nome : string = '', public preco : number = 0, public quantidade : number = 0) {
+
+  }
+
+  public getTotal() : number {
+    return this.preco * this.quantidade;
+  }
+}
 
 @Component({
   selector: 'app-root',
@@ -7,24 +19,26 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   displayedColumns: string[] = ['produto', 'preco', 'quantidade', 'total'];
-  dataSource = [{
-    produto: 'Cerveja',
-    preco: 6.00,
-    quantidade: 3,
-    getTotal: function () { return this.preco * this.quantidade }
-  },{
-    produto: 'Chopp',
-    preco: 5.00,
-    quantidade: 2,
-    getTotal: function () { return this.preco * this.quantidade }
-  },{
-    produto: 'Pizaa',
-    preco: 8,
-    quantidade: 1,
-    getTotal: function () { return this.preco * this.quantidade }
-  }]
+  dataSource = new MatTableDataSource<Produto>();
+
+  ngOnInit() {
+    this.dataSource.connect();
+    this.dataSource.data = [
+      new Produto('Cerveja', 6.00, 5),
+      new Produto('Chopp', 5.00, 3),
+      new Produto('Pizza', 2.00, 2),
+    ];
+  }
+
+  addProduto() {
+    this.dataSource.data.push(new Produto());
+  }
+
+  limparQuantidades() {
+    this.dataSource.data.forEach(produto => produto.quantidade = 0);
+  }
 
   getPrecoTotal() {
-    return this.dataSource.map(t => t.getTotal()).reduce((acc, value) => acc + value, 0);
+    return this.dataSource.data.map(t => t.getTotal()).reduce((acc, value) => acc + value, 0);
   }
 }
