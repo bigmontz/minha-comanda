@@ -5,10 +5,11 @@ import { NgxCurrencyModule } from 'ngx-currency';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {
   MatToolbarModule,
-  MatTableModule,
   MatButtonModule,
   MatFormFieldModule,
-  MatInputModule
+  MatInputModule,
+  MatCardModule,
+  MatGridListModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -22,11 +23,12 @@ import { AppComponent } from './app.component';
     BrowserAnimationsModule,
     FormsModule,
     MatToolbarModule,
-    MatTableModule,
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    NgxCurrencyModule
+    NgxCurrencyModule,
+    MatCardModule,
+    MatGridListModule
   ],
   providers: [],
   bootstrap: [AppComponent]

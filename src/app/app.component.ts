@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { MatTableDataSource } from '@angular/material/table';
 
 class Produto {
 
@@ -29,29 +28,28 @@ class Produto {
 })
 export class AppComponent {
   displayedColumns: string[] = ['produto', 'preco', 'quantidade', 'total', 'acoes'];
-  dataSource = new MatTableDataSource<Produto>();
+  public produtos : Produto[];
 
   ngOnInit() {
-    this.dataSource.data = [
-      new Produto('Cerveja', 6.00, 5),
-      new Produto('Chopp', 5.00, 3),
-      new Produto('Pizza', 2.00, 2),
+    this.produtos = [
+      new Produto('Cerveja', 6.00, 0),
+      new Produto('Chopp', 5.00, 0)
     ];
   }
 
   addProduto() {
-    this.dataSource.data = this.dataSource.data.concat(new Produto());
+    this.produtos = this.produtos.concat(new Produto());
   }
 
   limparQuantidades() {
-    this.dataSource.data.forEach(produto => produto.quantidade = 0);
+    this.produtos.forEach(produto => produto.quantidade = 0);
   }
 
   remover(element) {
-    this.dataSource.data = this.dataSource.data.filter(elemento => elemento !== element)
+    this.produtos = this.produtos.filter(elemento => elemento !== element)
   }
 
   getPrecoTotal() {
-    return this.dataSource.data.map(t => t.getTotal()).reduce((acc, value) => acc + value, 0);
+    return this.produtos.map(t => t.getTotal()).reduce((acc, value) => acc + value, 0);
   }
 }
