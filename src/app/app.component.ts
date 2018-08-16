@@ -10,6 +10,16 @@ class Produto {
   public getTotal() : number {
     return this.preco * this.quantidade;
   }
+
+  public add()  {
+    this.quantidade++;
+  }
+
+  public remove() {
+    if(this.quantidade > 0) {
+      this.quantidade --;
+    }
+  }
 }
 
 @Component({
@@ -18,11 +28,10 @@ class Produto {
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  displayedColumns: string[] = ['produto', 'preco', 'quantidade', 'total'];
+  displayedColumns: string[] = ['produto', 'preco', 'quantidade', 'total', 'acoes'];
   dataSource = new MatTableDataSource<Produto>();
 
   ngOnInit() {
-    this.dataSource.connect();
     this.dataSource.data = [
       new Produto('Cerveja', 6.00, 5),
       new Produto('Chopp', 5.00, 3),
@@ -31,11 +40,15 @@ export class AppComponent {
   }
 
   addProduto() {
-    this.dataSource.data.push(new Produto());
+    this.dataSource.data = this.dataSource.data.concat(new Produto());
   }
 
   limparQuantidades() {
     this.dataSource.data.forEach(produto => produto.quantidade = 0);
+  }
+
+  remover(element) {
+    this.dataSource.data = this.dataSource.data.filter(elemento => elemento !== element)
   }
 
   getPrecoTotal() {
