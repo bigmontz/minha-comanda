@@ -1,14 +1,40 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
 <head>
   <meta charset="utf-8">
   <title>MinhaComanda</title>
   <base href="/">
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/x-icon" href="images/icons/favicon.ico">
+  <link rel="manifest" href="/manifest.json">
+  <meta name="theme-color" content="#008080">
 </head>
 <body>
   <app-root></app-root>
+
+  <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyAwUSBvHyTcfwKKRKygV8E-sszybzoG-Xs",
+      authDomain: "bmz-comanda.firebaseapp.com",
+      databaseURL: "https://bmz-comanda.firebaseio.com",
+      projectId: "bmz-comanda",
+      storageBucket: "bmz-comanda.appspot.com",
+      messagingSenderId: "65291218279"
+    };
+    firebase.initializeApp(config);
+  </script>
+  <script>
+    // registration of service worker
+    // check if service worker API is available in browser
+    if('serviceWorker' in navigator) {
+      // register your service worker file.
+      navigator.serviceWorker.register('/service-worker.js')
+      .then(registration => console.log('S/W registered'))
+      .catch(err => console.log('S/W registration failed'))
+    }
+  </script>
 </body>
 </html>
