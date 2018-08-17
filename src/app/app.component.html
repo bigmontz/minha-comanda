@@ -1,43 +1,43 @@
 
-<mat-card>
-  <mat-card-title>Minha Comanda</mat-card-title>
+<mat-card fxLayout="column" fxLayoutGap="5px">
   <mat-card-title>
-    <mat-form-field>
-        <input placeholder="Valor Total" matInput [ngModel]="getPrecoTotal()" currencyMask readonly="true">
-    </mat-form-field>
+    <span>Minha Comanda</span>
   </mat-card-title>
-  <mat-card-actions>
-    <button mat-raised-button (click)="addProduto()" color="primary"> Adicionar Produto </button>
-    <button mat-raised-button (click)="limparQuantidades()" color="accent"> Limpar Quantidades </button>
+  <mat-card-content fxFlex="100%" fxLayout="row" fxLayoutAlign="end">
+    <mat-form-field fxFlex="100%" >
+        <label fxFlex="50%">Valor Total</label>
+        <input matInput [ngModel]="getPrecoTotal()" currencyMask readonly="true">
+    </mat-form-field>
+  </mat-card-content>
+  <mat-card-actions fxLayout="row" fxLayoutAlign="end" fxFlex="100%" fxLayoutGap="5px">
+    <button fxFlex="calc(100% -5px)" mat-raised-button (click)="addProduto()" color="primary"> Adc. Produto </button>
+    <button fxFlex="calc(100% -5px)" mat-raised-button (click)="limparQuantidades()" color="accent"> Limpar Qtd. </button>
   </mat-card-actions>
 </mat-card>
-<div
-  *ngFor="let produto of produtos">
-  <mat-card class="produtoCard">
-    <mat-card-title>
-      <mat-form-field>
-        <input placeholder="Produto" matInput [(ngModel)]="produto.nome">
+<div fxLayout="row wrap" fxLayout.xs="column" fxLayoutGap="5px">
+  <mat-card *ngFor="let produto of produtos" class="produtoCard" fxLayout="column" fxFlex.xs="100%" fxFlex="calc(50% - 5px)">
+
+    <mat-card-content fxFlex="100%" fxLayout="row" fxLayoutGap="5px" >
+      <mat-form-field fxFlex="33%">
+          <input placeholder="Produto" matInput [(ngModel)]="produto.nome">
       </mat-form-field>
-    </mat-card-title>
-    <mat-card-content>
-      <mat-form-field>
+      <mat-form-field fxFlex="33%">
         <input placeholder="Preço" matInput [(ngModel)]="produto.preco" currencyMask >
       </mat-form-field>
-    </mat-card-content>
-    <mat-card-content>
-      <mat-form-field>
-        <input placeholder="Quantidade" matInput [(ngModel)]="produto.quantidade" readonly="true">
+      <mat-form-field fxFlex="33%">
+        <input type="number" placeholder="Quantidade" matInput [(ngModel)]="produto.quantidade" readonly="true">
       </mat-form-field>
     </mat-card-content>
-    <mat-card-content>
-      <mat-form-field>
-          <input placeholder="Total Produto" matInput [ngModel]="produto.getTotal()" currencyMask readonly="true">
-      </mat-form-field>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-flat-button (click)="produto.add()" color="primary">+</button>
-      <button mat-flat-button (click)="produto.remove()" color="accent">-</button>
-      <button mat-flat-button (click)="remover(produto)" color="warn">x</button>
+    <mat-card-actions fxLayout="row" fxLayoutAlign="end" fxFlex="100%" fxLayoutGap="5px" >
+      <div fxFlex="15%" fxFlex.xs="33%">
+        <button fxFlex="calc(100% -5px)"  mat-flat-button (click)="produto.add()" color="primary">+</button>
+      </div>
+      <div fxFlex="15%" fxFlex.xs="33%">
+        <button fxFlex="calc(100% -5px)"  mat-flat-button (click)="produto.remove()" color="accent">-</button>
+      </div>
+      <div fxFlex="15%" fxFlex.xs="33%">
+        <button fxFlex="calc(100% -5px)" mat-flat-button (click)="remover(produto)" color="warn">x</button>
+      </div>
     </mat-card-actions>
   </mat-card>
 </div>
